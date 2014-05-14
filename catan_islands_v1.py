@@ -30,13 +30,13 @@ def catan_randtiles():
             red_counter += 1
 
     #parameter checks: 1) need more than seven omitted tiles; 2) more than two red numbers; 3) at least one of each resource
-    if (("Wood" in all_tiles) or ("Wheat" in all_tiles) or ("Sheep" in all_tiles) or ("Brick" in all_tiles) or ("Ore" in all_tiles) == False) or (nuke_counter <= 7) or (red_counter <= 2):
+    if (("Wood" in all_tiles) is False) or (("Wheat" in all_tiles) is False) or (("Sheep" in all_tiles) is False) or (("Brick" in all_tiles) is False) or (("Ore" in all_tiles) is False) or (nuke_counter <= 7) or (red_counter <= 2):
         catan_randtiles()
     else:
-        print(resources[:3], "\n", resources[3:7], "\n", resources[7:12], "\n", resources[12:16], "\n", resources[16:19])
+        print(all_tiles[:3], "\n", all_tiles[3:7], "\n", all_tiles[7:12], "\n", all_tiles[12:16], "\n", all_tiles[16:19])
         print(" ")
         print("Numbers:")
-        print(numberlist[:3], "\n", numberlist[3:7], "\n", numberlist[7:12], "\n", numberlist[12:16], "\n", numberlist[16:19])
+        print(numbers[:3], "\n", numbers[3:7], "\n", numbers[7:12], "\n", numbers[12:16], "\n", numbers[16:19])
 
 
 print("Catan Islands v1.6")
