@@ -47,7 +47,7 @@ def catan_islands():
     if (nuke_counter < 9):
         catan_islands()
     else:
-        print("Catan Islands v1.6")
+        print("Catan Islands v1.7")
         print("Each bridge is one road length, and costs two roads")
         print("Setup follows traditional Catan board 3-4-5-4-3 configuration")
         print(" ")
