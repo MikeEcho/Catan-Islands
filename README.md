@@ -19,8 +19,15 @@ Source code: catan_islands.old.py (Catan Islands v1.6) by MikeEcho
 Catan Islands Update History (v1)
 
 v1.1: tiles represented by numbers to denote any resource; numbers same format
+
 v1.2: replaced tile numbers by resource names
+
 v1.3: implemented limit of 7 on number of omitted tiles
+
 v1.4: implemented base requirement of one of each resource on the board
+
 v1.5: modified numbers display to see remaining numbers clearly
+
 v1.6: implemented base requirement of at least three red numbers
+
+v1.7: reworked code for efficiency; desert is now always on the board
