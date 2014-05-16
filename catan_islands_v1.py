@@ -1,60 +1,64 @@
-import random
+import random as r
 
-def catan_randtiles():
-    resources = ["Wood","Wood","Wood","Wood","Wheat","Wheat","Wheat","Wheat","Sheep","Sheep","Sheep","Sheep","Brick","Brick","Brick","Ore","Ore","Ore","Desert"]
-    random.shuffle(resources)
+def catan_islands():
+    base_tiles = ["Wood","Wheat","Sheep","Brick","Ore"]
+    misc_tiles = ["Wood","Wood","Wood","Wheat","Wheat","Wheat",
+                 "Sheep","Sheep","Sheep","Brick","Brick","Ore","Ore"]
 
-    numberlist = [2,3,3,4,4,5,5,6,6,7,8,8,9,9,10,10,11,11,12]
-    random.shuffle(numberlist)
+    misc_num = [2,3,3,4,4,5,5,6,8,9,9,10,10,11,11,12]
+    base_num = [6,8] #following code to ensure at least three red numbers on board
+    a = r.choice(base_num)
+    base_num.append(a)
+    del misc_num[misc_num.index(a)]
 
-    dennis = 0
-    for i in resources:
-        nuke = random.randint(0,1)
-        if nuke == 1:
-            resources[dennis] = '-'
-            numberlist[dennis] = '-'
-        dennis += 1
-    all_tiles = resources
-    numbers = numberlist
+    for i in range(2):
+        b = r.choice(misc_num)
+        base_num.append(b)
+        del misc_num[misc_num.index(b)]
+    base_tiles += ["Desert"]
+    base_num += [7]
 
-    #to count nuked tiles
+    all_tiles = []
+    all_num = []
+    all_tiles += base_tiles
+    all_num += base_num
+
+    counter = 0
     nuke_counter = 0
-    for i in all_tiles:
-        if i == '-':
+    for i,j in zip(misc_tiles,misc_num):
+        nuke = r.randint(0,1)
+        if nuke == 1:
+            misc_tiles[counter] = '-'
+            misc_num[counter] = '-'
             nuke_counter += 1
+        counter += 1
+    all_tiles += misc_tiles
+    all_num += misc_num
 
-    #to count remaining red numbers (6 and 8)
-    red_counter = 0
-    for j in numbers:
-        if j == 6 or j==8:
-            red_counter += 1
+    alltiles_shuf = []
+    allnum_shuf = []
 
-    #parameter checks: 1) need more than seven omitted tiles; 2) more than two red numbers; 3) at least one of each resource
-    if (("Wood" in all_tiles) is False) or (("Wheat" in all_tiles) is False) or (("Sheep" in all_tiles) is False) or (("Brick" in all_tiles) is False) or (("Ore" in all_tiles) is False) or (nuke_counter <= 7) or (red_counter <= 2):
-        catan_randtiles()
+    index_shuf = list(range(len(all_tiles)))
+    r.shuffle(index_shuf)
+    for i in index_shuf:
+        alltiles_shuf.append(all_tiles[i])
+        allnum_shuf.append(all_num[i])
+
+    if (nuke_counter < 9):
+        catan_islands()
     else:
-        print(all_tiles[:3], "\n", all_tiles[3:7], "\n", all_tiles[7:12], "\n", all_tiles[12:16], "\n", all_tiles[16:19])
+        print("Catan Islands v1.6")
+        print("Each bridge is one road length, and costs two roads")
+        print("Setup follows traditional Catan board 3-4-5-4-3 configuration")
+        print(" ")
+        print("Tiles:")
+        print(alltiles_shuf[:3], "\n", alltiles_shuf[3:7], "\n", alltiles_shuf[7:12],
+              "\n", alltiles_shuf[12:16], "\n", alltiles_shuf[16:19])
         print(" ")
         print("Numbers:")
-        print(numbers[:3], "\n", numbers[3:7], "\n", numbers[7:12], "\n", numbers[12:16], "\n", numbers[16:19])
+        print(allnum_shuf[:3], "\n", allnum_shuf[3:7], "\n", allnum_shuf[7:12],
+              "\n", allnum_shuf[12:16], "\n", allnum_shuf[16:19])
+        print(" ")
+        print("Update history can be found on www.github.com/MikeEcho/Catan-Islands")
 
-
-print("Catan Islands v1.6")
-print("Each bridge is one road length, and costs two roads")
-print("Setup follows traditional Catan board 3-4-5-4-3 configuration")
-print(" ")
-print("Tiles:")
-catan_randtiles()
-print(" ")
-print("If 7/robber is on a resource, replace with 6 or 8.")
-print("If there exists a 6 already, place an 8. The same, vice versa.")
-print("If there exist one 6 and one 8 already, roll for another 6 or 8.")
-print("If there exist all 6 and 8s already, place 5 or 9 in similar fashion.")
-print(" ")
-print("--Update history--")
-print("v1.1: tiles represented by numbers to denote any resource; numbers same format")
-print("v1.2: replaced tile numbers by resource names")
-print("v1.3: implemented limit of 7 on number of omitted tiles")
-print("v1.4: implemented base requirement of one of each resource on the board")
-print("v1.5: modified numbers display to see remaining numbers clearly")
-print("v1.6: implemented base requirement of at least three red numbers")
+catan_islands()
