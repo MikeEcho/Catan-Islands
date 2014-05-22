@@ -1,7 +1,7 @@
 Catan-Islands
 =============
 
-A program based on The Settlers of Catan (vanilla) which creates random board setups with omitted tiles.
+A program based on The Settlers of Catan (vanilla) which creates random board setups with omitted tiles. Not intended for commercial use.
 
 Catan Islands v1 by MikeEcho. Catan Islands v2 by soapfoot.
 
